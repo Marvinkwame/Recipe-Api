@@ -73,9 +73,8 @@ export const login = async (req: Request, res: Response) => {
     );
 
     if (!matchedPassword) {
-        return res.status(400).json({ message: "Invalid Credemtials" })
+      return res.status(400).json({ message: "Invalid Credemtials" });
     }
-
 
     //create a new jwt token when the user logs in using the user._id from the database
     const token = jwt.sign(
@@ -101,25 +100,28 @@ export const login = async (req: Request, res: Response) => {
   }
 };
 
-
-
 //get user details
 
 export const getUserDetails = async (req: Request, res: Response) => {
-    try {
-        const userId = req.userId;
+  try {
+    const userId = req.userId;
 
-        const user = await User.findById(userId).select("-password")
+    const user = await User.findById(userId).select("-password");
 
-        if(!user) {
-            return res.status(400).send({ message: "User not found" })
-        }
-
-        res.json(user)
-
-    } catch (error) {
-        console.log(error);
-        res.status(500).send({ message: "Something went wrong" })
+    if (!user) {
+      return res.status(400).send({ message: "User not found" });
     }
 
-}
+    res.json(user);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ message: "Something went wrong" });
+  }
+};
+
+export const logout = async (req: Request, res: Response) => {
+  res.cookie("jwtToken", "", {
+    expires: new Date(0), // token has expired on creation. its invalid
+  });
+  res.send();
+};

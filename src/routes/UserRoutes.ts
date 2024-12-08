@@ -1,6 +1,11 @@
 import express from "express";
 import { check, validationResult } from "express-validator";
-import { getUserDetails, login, signup } from "../controllers/UserController";
+import {
+  getUserDetails,
+  login,
+  logout,
+  signup,
+} from "../controllers/UserController";
 import verifyToken from "../middleware/verifyToken";
 
 const router = express.Router();
@@ -18,18 +23,23 @@ router.post(
   signup as express.RequestHandler
 );
 
-
 //user login
-router.post("/login",  [
+router.post(
+  "/login",
+  [
     // Validate user input
     check("email", "Email is required").isEmail(),
     check("password", "Password with 6 or more characters required").isLength({
       min: 6,
     }),
-  ], login as express.RequestHandler )
-
+  ],
+  login as express.RequestHandler
+);
 
 //getting user details
-router.get("/profile", verifyToken, getUserDetails as express.RequestHandler)
+router.get("/profile", verifyToken, getUserDetails as express.RequestHandler);
+
+//logut
+router.post("/logout", logout as express.RequestHandler);
 
 export default router;

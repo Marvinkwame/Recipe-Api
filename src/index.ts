@@ -2,6 +2,7 @@ import express, { Request, Response } from "express";
 import mongoose from "mongoose"
 import "dotenv/config";
 import authRoutes from "./routes/UserRoutes"
+import recipeRoutes from "./routes/RecipeRoutes"
 import cookieParser from "cookie-parser"
 
 
@@ -20,6 +21,7 @@ app.get("/test", async (req: Request, res: Response) => {
 
 
 app.use("/api/auth/", authRoutes)
+app.use("/api/recipes", recipeRoutes)
 
 
 app.listen("5000", () => {

@@ -4,7 +4,7 @@ import jwt, { JwtPayload } from "jsonwebtoken";
 declare global {
   namespace Express {
     interface Request {
-      userId?: string;
+      userId: string;
     }
   }
 }
@@ -14,8 +14,10 @@ const verifyToken: RequestHandler = async (req: Request, res: Response, next: Ne
   const token = req.cookies.jwtToken;
 
   if (!token) {
-     res.status(401).json({ message: "Unauthorized" });
-     return
+    // res.status(401).json({ message: "Unauthorized" });
+     //return
+      // Proceed without authentication for unauthenticated users
+     return next();
   }
 
   try {
