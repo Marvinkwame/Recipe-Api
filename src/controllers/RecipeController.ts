@@ -31,7 +31,6 @@ export const getRecipe = async (req: Request, res: Response) => {
     if (!userRecipe) {
       return res.status(400).json({ message: "No recipe found" });
     }
-   
 
     if (userRecipe.isPublic) {
       //if recipe isPublic === true
@@ -46,7 +45,7 @@ export const getRecipe = async (req: Request, res: Response) => {
 
     return res
       .status(403)
-      .json({ message: "Access denied. Recipe is private." });
+      .json({ message: "Recipe is private." });
   } catch (err) {
     console.log(err);
     res.status(500).json({ message: "Something went wrong" });
@@ -95,6 +94,28 @@ export const deleteRecipe = async (req: Request, res: Response) => {
     }
 
     res.status(200).json({ message: "Recipe deleted!!" });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "Something went wrong" });
+  }
+};
+
+export const getPublicRecipe = async (req: Request, res: Response) => {
+  const id = req.params.id.toString();
+  try {
+    const userRecipe = await Recipe.findById({
+      _id: id,
+    });
+
+    if (!userRecipe) {
+      return res.status(400).json({ message: "No recipe found" });
+    }
+
+    if (userRecipe.isPublic) {
+      return res.status(200).json(userRecipe);
+    }
+
+    return res.status(403).json({ message: "This recipe is private" });
   } catch (err) {
     console.log(err);
     res.status(500).json({ message: "Something went wrong" });

@@ -3,6 +3,7 @@ import mongoose from "mongoose"
 import "dotenv/config";
 import authRoutes from "./routes/UserRoutes"
 import recipeRoutes from "./routes/RecipeRoutes"
+import publicRoutes from "./routes/PublicRoutes"
 import cookieParser from "cookie-parser"
 
 
@@ -22,6 +23,7 @@ app.get("/test", async (req: Request, res: Response) => {
 
 app.use("/api/auth/", authRoutes)
 app.use("/api/recipes", recipeRoutes)
+app.use("/api/public", publicRoutes)
 
 
 app.listen("5000", () => {
