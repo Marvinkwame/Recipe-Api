@@ -2,11 +2,12 @@ import mongoose from "mongoose";
 import { CategoryType } from "../types/Category";
 
 const categorySchema = new mongoose.Schema({
-  title: {
+  name: {
     type: String,
     required: true,
-    unique: true,
   },
+  userId: { type: String, required: true },
+
 });
 
 

@@ -4,6 +4,7 @@ import "dotenv/config";
 import authRoutes from "./routes/UserRoutes"
 import recipeRoutes from "./routes/RecipeRoutes"
 import publicRoutes from "./routes/PublicRoutes"
+import categoryRoutes from "./routes/CategoryRoutes"
 import cookieParser from "cookie-parser"
 
 
@@ -24,6 +25,7 @@ app.get("/test", async (req: Request, res: Response) => {
 app.use("/api/auth/", authRoutes)
 app.use("/api/recipes", recipeRoutes)
 app.use("/api/public", publicRoutes)
+app.use("/api/categories", categoryRoutes)
 
 
 app.listen("5000", () => {

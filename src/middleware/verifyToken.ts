@@ -14,10 +14,8 @@ const verifyToken: RequestHandler = async (req: Request, res: Response, next: Ne
   const token = req.cookies.jwtToken;
 
   if (!token) {
-       // res.status(401).json({ message: "Unauthorized" });
-     //return
-      // Proceed without authentication for unauthenticated users
-      return next();
+     res.status(401).json({ message: "Unauthorized" });
+     return
   }
 
   try {

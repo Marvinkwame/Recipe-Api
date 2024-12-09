@@ -6,6 +6,7 @@ import {
   deleteRecipe,
   getRecipe,
   updateRecipe,
+  getAllRecipes
 } from "../controllers/RecipeController";
 
 const router = express.Router();
@@ -18,7 +19,7 @@ router.post(
 );
  
 //Listof recipes(add filtering and pagination)
-router.get("/");
+router.get("", verifyToken, getAllRecipes as express.RequestHandler);
 
 //Get recipe based on ownership
 router.get("/:id", verifyToken, getRecipe as express.RequestHandler);

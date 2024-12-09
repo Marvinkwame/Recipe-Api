@@ -9,6 +9,7 @@ const userSchema = new mongoose.Schema({
     unique: true,
   },
   password: { type: String, required: true, minlength: 6 },
+  
 });
 
 userSchema.pre("save", async function (next) {

@@ -35,3 +35,8 @@ export const validateRecipeRequest = [
   body("category").isString().notEmpty().withMessage("Category is required"),
   body("isPublic").isBoolean().withMessage("Boolean is required"),
 ];
+
+
+export const validateCategoryRequest = [
+  body("name").isString().notEmpty().withMessage("Name is required"),
+]

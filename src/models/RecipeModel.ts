@@ -11,7 +11,7 @@ const recipeSchema = new mongoose.Schema({
   description: {
     type: String,
     required: true,
-  },
+  }, 
   imageUrl: {
     type: String,
     required: true,
@@ -19,7 +19,7 @@ const recipeSchema = new mongoose.Schema({
   },
   tags: [{ type: String }],
   instructions: [{ type: String, required: true }],
-  category: { type: String },
+  category: { type: mongoose.Schema.Types.ObjectId, ref: "Category" },
   isPublic: {
     type: Boolean,
     required: true

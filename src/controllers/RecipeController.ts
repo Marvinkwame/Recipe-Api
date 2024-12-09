@@ -1,7 +1,6 @@
 import express, { Request, Response } from "express";
 import { RecipeType } from "../types/Recipe";
 import Recipe from "../models/RecipeModel";
-import verifyToken from "../middleware/verifyToken";
 
 export const createRecipe = async (req: Request, res: Response) => {
   try {
@@ -43,9 +42,7 @@ export const getRecipe = async (req: Request, res: Response) => {
       return res.status(200).json(userRecipe);
     }
 
-    return res
-      .status(403)
-      .json({ message: "Recipe is private." });
+    return res.status(403).json({ message: "Recipe is private." });
   } catch (err) {
     console.log(err);
     res.status(500).json({ message: "Something went wrong" });
@@ -119,5 +116,51 @@ export const getPublicRecipe = async (req: Request, res: Response) => {
   } catch (err) {
     console.log(err);
     res.status(500).json({ message: "Something went wrong" });
+  }
+};
+
+export const getAllRecipes = async (req: Request, res: Response) => {
+  try {
+    const pageSize = 5;
+    const pageNumber = parseInt(
+      req.query.page ? req.query.page.toString() : "1"
+    );
+
+    const skip = (pageNumber - 1) * pageSize; 
+
+    const allRecipes = await Recipe.find().skip(skip).limit(pageSize);
+
+
+    const totalRecipes = await Recipe.countDocuments()
+
+
+    const response = {
+      data: allRecipes,
+      pagination: {
+        totalRecipes,
+        page: pageNumber,
+        pages: Math.ceil(totalRecipes / pageSize)
+      }
+    }
+
+    res.json(response);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "Something went wrong" });
+  }
+};
+
+export const searchRecipe = async () => {};
+
+const searchQuery = (queryParams: any) => {
+  let constructedQuery: any = {};
+
+  if (queryParams.title) {
+    constructedQuery.$or = [
+      { title: new RegExp(queryParams.title, "i") }, //performs a case-insensitive match
+    ];
+  }
+
+  if (queryParams.tags) {
   }
 };
