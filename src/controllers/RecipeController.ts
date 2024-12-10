@@ -25,6 +25,7 @@ export const getRecipe = async (req: Request, res: Response) => {
     //found recipe by id
     const userRecipe = await Recipe.findById({
       _id: id,
+      userId: req.userId
     });
 
     if (!userRecipe) {
@@ -150,7 +151,8 @@ export const getAllRecipes = async (req: Request, res: Response) => {
 
 export const searchRecipes = async (req: Request, res: Response) => {
   try {
-    const query = searchFilterQuery(req.params)
+    const query = searchFilterQuery(req.query) //searchFilterQuery Function is below
+    console.log(query)
 
     const recipes = await Recipe.find(query)
 
