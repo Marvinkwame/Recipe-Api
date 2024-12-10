@@ -6,7 +6,8 @@ import {
   deleteRecipe,
   getRecipe,
   updateRecipe,
-  getAllRecipes
+  getAllRecipes,
+  searchRecipes
 } from "../controllers/RecipeController";
 
 const router = express.Router();
@@ -18,6 +19,9 @@ router.post(
   createRecipe as express.RequestHandler
 );
  
+//search and filter ednpoint
+router.get('/search', searchRecipes as express.RequestHandler )
+
 //Listof recipes(add filtering and pagination)
 router.get("", verifyToken, getAllRecipes as express.RequestHandler);
 
@@ -29,5 +33,7 @@ router.put("/:id", verifyToken, updateRecipe as express.RequestHandler);
 
 //delete a recipe 
 router.delete("/:id", verifyToken, deleteRecipe as express.RequestHandler )
+
+
 
 export default router;

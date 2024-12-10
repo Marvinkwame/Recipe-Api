@@ -126,22 +126,20 @@ export const getAllRecipes = async (req: Request, res: Response) => {
       req.query.page ? req.query.page.toString() : "1"
     );
 
-    const skip = (pageNumber - 1) * pageSize; 
+    const skip = (pageNumber - 1) * pageSize;
 
     const allRecipes = await Recipe.find().skip(skip).limit(pageSize);
 
-
-    const totalRecipes = await Recipe.countDocuments()
-
+    const totalRecipes = await Recipe.countDocuments();
 
     const response = {
       data: allRecipes,
       pagination: {
         totalRecipes,
         page: pageNumber,
-        pages: Math.ceil(totalRecipes / pageSize)
-      }
-    }
+        pages: Math.ceil(totalRecipes / pageSize),
+      },
+    };
 
     res.json(response);
   } catch (err) {
@@ -150,17 +148,43 @@ export const getAllRecipes = async (req: Request, res: Response) => {
   }
 };
 
-export const searchRecipe = async () => {};
+export const searchRecipes = async (req: Request, res: Response) => {
+  try {
+    const query = searchFilterQuery(req.params)
 
-const searchQuery = (queryParams: any) => {
+    const recipes = await Recipe.find(query)
+
+
+    res.status(200).json(recipes)
+  } catch (err) {
+    console.error(err);
+    res
+      .status(500)
+      .json({ error: "An error occurred while searching for recipes." });
+  }
+};
+
+const searchFilterQuery = (queryParams: any) => {
   let constructedQuery: any = {};
 
+  // Title Search
   if (queryParams.title) {
-    constructedQuery.$or = [
-      { title: new RegExp(queryParams.title, "i") }, //performs a case-insensitive match
-    ];
+    constructedQuery.title = new RegExp(queryParams.title, "i"); 
   }
 
+  // Tags filtering
   if (queryParams.tags) {
+    constructedQuery.tags = {
+      $all: Array.isArray(queryParams.tags)
+        ? queryParams.tags
+        : [queryParams.tags],
+    };
   }
+
+  // Category filtering
+  if (queryParams.category) {
+    constructedQuery.category = new RegExp(queryParams.category, "i"); 
+  }
+
+  return constructedQuery;
 };

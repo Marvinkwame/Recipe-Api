@@ -19,7 +19,8 @@ const recipeSchema = new mongoose.Schema({
   },
   tags: [{ type: String }],
   instructions: [{ type: String, required: true }],
-  category: { type: mongoose.Schema.Types.ObjectId, ref: "Category" },
+  //category: { type: mongoose.Schema.Types.ObjectId, ref: "Category" },
+  category: { type: String },
   isPublic: {
     type: Boolean,
     required: true
