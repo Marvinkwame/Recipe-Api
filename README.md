@@ -26,43 +26,15 @@ NODE_ENV=development
 
 PROJECT FOLDER
 
-├── src/
-│   ├── config/
-│   │   ├── mongo.ts       # MongoDB configuration
-│   │   ├── rateLimit.ts      # Rate limiting configuration
-│   │
-│   ├── controllers/
-│   │   ├── AuthController.ts # User authentication logic
-│   │   ├── RecipeController.ts # Recipe management logic
-│   │   ├── CategoryController.ts # Category CRUD logic
-│   │   ├── PublicController.ts  # Logic for public recipe views
-│   │
-│   ├── middlewares/
-│   │   ├── verifyToken.ts # Middleware for authentication
-│   │   ├── validation.ts # Middleware for authentication
-│   │
-│   ├── models/
-│   │   ├── UserModel.ts           # User model schema
-│   │   ├── RecipeModel.ts         # Recipe model schema
-│   │   ├── CategoryModel.ts       # Category model schema
-│   │
-│   ├── routes/
-│   │   ├── UserRoutes.ts     # Routes for user authentication
-│   │   ├── RecipeRoutes.ts   # Routes for recipe management
-│   │   ├── CategoryRoutes.ts # Routes for category management
-│   │   ├── PublicRoutes.ts   # Routes for public access
-│   │
-│   ├── types/
-│   │   ├── Recipe.ts         # Type definitions for Recipe
-│   │   ├── User.ts           # Type definitions for User
-│   │   ├── Category.ts      # Type definitions for Category
-│   │
-│   ├── index.ts             # Entry point for the application
-│
-├── .env                      # Environment variables
-├── .gitignore                # Git ignore file
-├── package.json              # Project dependencies and scripts
-├── README.md                 # Documentation for the project
+project_name/
+|
+|--- src
+|--- controllers
+|--- middleware
+|--- models
+|--- routes
+|--- models
+|--- type
 
 
 
