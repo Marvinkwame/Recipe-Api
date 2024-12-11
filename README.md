@@ -1,6 +1,6 @@
-#Recipe Management API
+# Recipe Management API
 
-##Description
+## Description
 
 The Recipe Management API allows users to create, view, update, and delete recipes. 
 It includes features for user authentication, category management, and public/private recipe visibility. 
@@ -8,23 +8,23 @@ The API is designed to make it easy for users to organize and share their recipe
 secure access and efficient data management.
 
 
-##How To Run Locally
+## How To Run Locally
 *Clone  the Repository
 *git clone <repository-url>
 *cd <project-folder>
 
 
-##Install Dependencies
-*npm install
+## Install Dependencies
+* npm install
 
 
-##Set Up Environment Variables
-*MONGODB_CONNECTION_URL=<your-mongodb-connection-string>
-*JWT_SECRET_KEY=<your-jwt-secret-key>
-*NODE_ENV=development
+## Set Up Environment Variables
+* MONGODB_CONNECTION_URL=<your-mongodb-connection-string>
+* JWT_SECRET_KEY=<your-jwt-secret-key>
+* NODE_ENV=development
 
 
-PROJECT FOLDER
+## PROJECT FOLDER
 ```
 ├── src/
 │   ├── config/
@@ -67,5 +67,5 @@ PROJECT FOLDER
 
 
 
-##Start the Server
-*npm run dev
+## Start the Server
+* npm run dev
