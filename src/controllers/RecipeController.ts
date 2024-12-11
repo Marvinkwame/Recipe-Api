@@ -152,7 +152,6 @@ export const getAllRecipes = async (req: Request, res: Response) => {
 export const searchRecipes = async (req: Request, res: Response) => {
   try {
     const query = searchFilterQuery(req.query) //searchFilterQuery Function is below
-    console.log(query)
 
     const recipes = await Recipe.find(query)
 

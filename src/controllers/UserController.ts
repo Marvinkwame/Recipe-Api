@@ -3,6 +3,7 @@ import { check, validationResult } from "express-validator";
 import User from "../models/UserModel";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import expressAsyncHandler from "express-async-handler";
 
 //User Signup
 export const signup = async (req: Request, res: Response) => {
@@ -19,7 +20,8 @@ export const signup = async (req: Request, res: Response) => {
 
     //if there is a user with the email already in the db, dont register the user
     if (user) {
-      return res.status(400).send({ message: "User already exists" });
+       res.status(400).send({ message: "User already exists" });
+       return
     }
 
     //hashed the Password in the model
@@ -89,8 +91,8 @@ export const login = async (req: Request, res: Response) => {
 
     res.cookie("jwtToken", token, {
       httpOnly: true, //can only be accessed on the server
-      secure: process.env.NODE_ENV === "production", //means on localhost its false, but true in production
-      maxAge: 86400000,
+      secure: process.env.NODE_ENV === "production", //Ensures cookie is sent only over HTTPS in production
+      maxAge: 86400000, //Cookie will expire after 1 day
     });
 
     res.send({ token }); //returning the jwt Token

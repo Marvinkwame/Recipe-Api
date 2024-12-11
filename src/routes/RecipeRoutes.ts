@@ -15,7 +15,7 @@ const router = express.Router();
 router.post(
   "/",
   verifyToken,
-  validateRecipeRequest,
+  validateRecipeRequest, 
   createRecipe as express.RequestHandler
 );
  

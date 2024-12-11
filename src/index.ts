@@ -7,16 +7,11 @@ import publicRoutes from "./routes/PublicRoutes";
 import categoryRoutes from "./routes/CategoryRoutes";
 import cookieParser from "cookie-parser";
 import { rateLimit } from "express-rate-limit";
+import connectDB from "./config/mongo";
+import limiter from "./config/rateLimit";
 
-mongoose
-  .connect(process.env.MONGODB_CONNECTION_URL as string)
-  .then(() => console.log("Connected to database"));
 
-const limiter = rateLimit({
-  windowMs: 5 * 60 * 1000, //5 minutes
-  limit: 20, //20 requests
-  message: "Too many requests from this IP, please try again later.",
-});
+connectDB()
 
 const app = express();
 app.use(cookieParser());
@@ -25,9 +20,6 @@ app.use(express.json());
 //Applying limit to all requests
 app.use(limiter);
 
-app.get("/test", async (req: Request, res: Response) => {
-  res.json({ message: "test" });
-});
 
 app.use("/api/auth/", authRoutes);
 app.use("/api/recipes", recipeRoutes);
