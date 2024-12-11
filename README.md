@@ -24,19 +24,6 @@ JWT_SECRET_KEY=<your-jwt-secret-key>
 NODE_ENV=development
 
 
-PROJECT FOLDER
-
-project_name/
-|
-|--- src
-|--- controllers
-|--- middleware
-|--- models
-|--- routes
-|--- models
-|--- type
-
-
 
 4.Start the Server
 npm run dev
