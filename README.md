@@ -23,6 +23,14 @@ MONGODB_CONNECTION_URL=<your-mongodb-connection-string>
 JWT_SECRET_KEY=<your-jwt-secret-key>
 NODE_ENV=development
 
+PROJECT STRUCTURE
+─src
+    ├───config
+    ├───controllers
+    ├───middleware
+    ├───models
+    ├───routes
+    └───types
 
 
 4.Start the Server
